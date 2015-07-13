@@ -38,7 +38,7 @@ steg_decode_images - Decode to IMAGE. Command line run program, controlled with 
 
 steg_functions - contains all the functions necessary to func the other steg scripts. Please edit the other steg scripts to have the correct path to this file.
 
-Please contact grm32@cam.ac.uk, cm771@cam.ac.uk, pm473@cam.ac.uk for support.
+Please contact grm32(at)cam.ac.uk for support
 
   
                            .       .
