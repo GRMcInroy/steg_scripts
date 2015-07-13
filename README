@@ -1,0 +1,64 @@
+######################### STEGOSAURUS SUITE ##########################
+
+
+
+                           .       .
+                          / `.   .' \
+                  .---.  <    > <    >  .---.
+                  |    \  \ - ~ ~ - /  /    |
+                   ~-..-~             ~-..-~
+               \~~~\.'                    `./~~~/
+                \__/                        \__/
+                 /                  .-    .  \
+          _._ _.-    .-~ ~-.       /       }   \/~~~/
+      _.-'q  }~     /       }     {        ;    \__/
+     {'__,  /      (       /      {       /      `. ,~~|   .     .
+      `''''='~~-.__(      /_      |      /- _      `..-'   \\   //
+                  / \   =/  ~~--~~{    ./|    ~-.     `-..__\\_//_.-'
+                 {   \  +\         \  =\ (        ~ - . _ _ _..---~
+                 |  | {   }         \   \_\
+                '---.o___,'       .o___,'        
+
+
+lemonjuice - encode two/three ascii messages in a double stranded DNA duplex
+
+baking_soda - encode three binary image files in a series of double stranded DNA duplexes
+
+ShortRefGlobalAligner - A short reference global aligner written by Dario Beraldi; does what it sas on the tin
+
+raw2srga - trim raw fastq file and align with SRGA
+
+raw2srga_split - same as raw2srga but splits the raw fastq file by inline barcodes
+
+steg_draft - create a draft reference sequence from the output of SRGA
+
+steg_decode_text - Decode to TEXT. Command line program, controlled with argument flags. Runs in different modes depending on if input data is from sequencing, BS-sequencing or oxBS-sequencing. In BS mode can have 5mC position list supplied for application of a switching cipher.
+
+steg_decode_images - Decode to IMAGE. Command line run program, controlled with argument flags. Runs in different modes depending on if input data is from sequencing, BS-sequencing or oxBS-sequencing. In BS mode can have 5mC position list supplied for application of a switching cipher.
+
+steg_functions - contains all the functions necessary to func the other steg scripts. Please edit the other steg scripts to have the correct path to this file.
+
+Please contact grm32@cam.ac.uk, cm771@cam.ac.uk, pm473@cam.ac.uk for support.
+
+  
+                           .       .
+                          / `.   .' \
+                  .---.  <    > <    >  .---.
+                  |    \  \ - ~ ~ - /  /    |
+                   ~-..-~             ~-..-~
+               \~~~\.'                    `./~~~/
+                \__/                        \__/
+                 /                  .-    .  \
+          _._ _.-    .-~ ~-.       /       }   \/~~~/
+      _.-'q  }~     /       }     {        ;    \__/
+     {'__,  /      (       /      {       /      `. ,~~|   .     .
+      `''''='~~-.__(      /_      |      /- _      `..-'   \\   //
+                  / \   =/  ~~--~~{    ./|    ~-.     `-..__\\_//_.-'
+                 {   \  +\         \  =\ (        ~ - . _ _ _..---~
+                 |  | {   }         \   \_\
+                '---.o___,'       .o___,'        
+
+
+
+
+######################################################################
