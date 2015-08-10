@@ -1,7 +1,5 @@
 ######################### STEGOSAURUS SUITE ##########################
 
-
-
                            .       .
                           / `.   .' \
                   .---.  <    > <    >  .---.
@@ -20,9 +18,11 @@
                 '---.o___,'       .o___,'        
 
 
-lemonjuice - encode two/three ascii messages in a double stranded DNA duplex
+steg_functions - contains all the functions/library dependencies necessary to run the other steg scripts. Please edit the other steg scripts to have the correct path to this file on your system
 
-baking_soda - encode three binary image files in a series of double stranded DNA duplexes
+lemonjuice - encode two/three ascii messages in a library of double stranded DNA duplexes
+
+baking_soda - encode three binary image files in a library of double stranded DNA duplexes
 
 ShortRefGlobalAligner - A short reference global aligner written by Dario Beraldi; does what it sas on the tin
 
@@ -32,15 +32,15 @@ raw2srga_split - same as raw2srga but splits the raw fastq file by inline barcod
 
 steg_draft - create a draft reference sequence from the output of SRGA
 
-steg_decode_text - Decode to TEXT. Command line program, controlled with argument flags. Runs in different modes depending on if input data is from sequencing, BS-sequencing or oxBS-sequencing. In BS mode can have 5mC position list supplied for application of a switching cipher.
+steg_decode_text - Decode to TEXT. Command line program, controlled with argument flags. Runs in different modes depending on if input data is from sequencing, BS-sequencing or oxBS-sequencing. In BS mode can have 5mC position list supplied for application of a switching cipher
 
-steg_decode_images - Decode to IMAGE. Command line run program, controlled with argument flags. Runs in different modes depending on if input data is from sequencing, BS-sequencing or oxBS-sequencing. In BS mode can have 5mC position list supplied for application of a switching cipher.
+steg_decode_images - Decode to IMAGE. Command line run program, controlled with argument flags. Runs in different modes depending on if input data is from sequencing, BS-sequencing or oxBS-sequencing. In BS mode can have 5mC position list supplied for application of a switching cipher
 
-steg_functions - contains all the functions necessary to func the other steg scripts. Please edit the other steg scripts to have the correct path to this file.
 
-Please contact grm32(at)cam.ac.uk for support
+R version 3.1.1 (2014-07-10) was used throughout [R Core Team (2014). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL http://www.R-project.org/].
 
-  
+Please contact grm32(at)cam.ac.uk, cm771(at)cam.ac.uk or pm473(at)cam.ac.uk for support.
+
                            .       .
                           / `.   .' \
                   .---.  <    > <    >  .---.
@@ -57,8 +57,5 @@ Please contact grm32(at)cam.ac.uk for support
                  {   \  +\         \  =\ (        ~ - . _ _ _..---~
                  |  | {   }         \   \_\
                 '---.o___,'       .o___,'        
-
-
-
 
 ######################################################################
