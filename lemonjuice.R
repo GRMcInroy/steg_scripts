@@ -12,6 +12,19 @@ binary_messages_vec <- character(length = 0)
 wrap_convert(c(input_file1, input_file2, input_file3))                                                   
 binary_messages <- data.frame(messages = binary_messages_vec, stringsAsFactors = FALSE)                          
 
+## Pad to equal length messages
+nchar1 <- nchar(binary_messages[1,1])
+nchar2 <- nchar(binary_messages[2,1])
+nchar3 <- nchar(binary_messages[3,1])
+
+if ((nchar1 == nchar2 & nchar2 == nchar3) != TRUE) {
+    for (i in 1:3) {
+        if (nchar(binary_messages[i,1]) != max(nchar1, nchar2, nchar3)) {
+            binary_messages[i,1] <- paste0(append(binary_messages[i,1], sample(c(0,1), (max(nchar1, nchar2, nchar3) - nchar(binary_messages[i,1])), replace = TRUE)), collapse = "")
+        }
+    }
+}
+
 ## Create character vector containing the encoded messages one position per element
 split_bin <- strsplit(binary_messages$messages, split = "") ## list of 3 char vectors, 1 bit/element
 split_binary_messages <- data.frame(matrix(unlist(split_bin), nrow=length(split_bin), byrow=T), stringsAsFactors = FALSE)    
