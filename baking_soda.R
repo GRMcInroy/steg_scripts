@@ -1,24 +1,34 @@
 ## Source file containing functions and library dependencies
 suppressWarnings(source("STEG_functions.R"))
 
-## Name of output text file containing the DNA sequences
-output_name <- "output_gamma_horiz"
+output_prefix <- format(Sys.time(), "%Y%m%d_%H%M")
+
+## Read in command line arguments
+args <- commandArgs(TRUE)
+
+cat("\n***Options chosen***\n")
+cat("Scanning direction:", args[1], "\n", sep = " ")
+cat("Encoding method:", args[2], "\n\n", sep = " ")
 
 ## Choose scan method for rle: "horizontal", "vertical", "zigzag"
-scan_method <- "horizontal"
+scan_method <- args[1]
 
 ## Choose encoding method for rle: "7bit", "gamma", "delta"
-encoding <- "gamma"
+encoding <- args[2]
 
 ## File names of input images, which must be in .pbm format
-file1 <- "Darwin.pbm"
-file2 <- "Franklin.pbm"
-file3 <- "Turing.pbm"
+file1 <- args[3]
+file2 <- args[4]
+file3 <- args[5]
+splitlength <- as.numeric(args[6])
+
+## Name of output text file containing the DNA sequences
+output_name <- paste0(output_prefix, "_bakingsoda.out", collapse = "")
 
 ## Read in the binary image files
-image1 <- read.pnm(file1)
-image2 <- read.pnm(file2)
-image3 <- read.pnm(file3)
+suppressWarnings(image1 <- read.pnm(file1))
+suppressWarnings(image2 <- read.pnm(file2))
+suppressWarnings(image3 <- read.pnm(file3))
 
 ## Obtain a list of binary matrices describing the files
 img_mat_list <- list(img1 = getChannels(image1, colors = "grey"), 
@@ -70,7 +80,7 @@ for (i in 1:3) {
             bin_codes[[i]] <- bin_code     ## Captures output of intermediates in the for loop
             
             ## Splits the bin_code into oligo sized chunks of binary
-            oligos[[i]] <- strsplit(bin_code, '(?<=.{72})', perl=TRUE)[[1]]
+            oligos[[i]] <- strsplit(bin_code, paste0("(?<=.{", splitlength, "})", collapse = ""), perl=TRUE)[[1]]
 
       } else if (encoding == "gamma") {
             gamma_coded <- NULL
@@ -81,7 +91,7 @@ for (i in 1:3) {
             
             pastedGamma <- paste0(gamma_coded, collapse = "")
             bin_codes[[i]] <- pastedGamma  ## Captures output of intermediates in the for loop                   
-            oligos[[i]] <- strsplit(pastedGamma, '(?<=.{72})', perl=TRUE)[[1]]      
+            oligos[[i]] <- strsplit(pastedGamma, paste0("(?<=.{", splitlength, "})", collapse = ""), perl=TRUE)[[1]]      
             
       } else if (encoding == "delta") {
             delta_coded <- NULL
@@ -93,7 +103,7 @@ for (i in 1:3) {
             pastedDelta <- paste0(delta_coded, collapse = "")
             bin_codes[[i]] <- pastedDelta  ## Captures output of intermediates in the for loop
             
-            oligos[[i]] <- strsplit(pastedDelta, '(?<=.{72})', perl=TRUE)[[1]]    
+            oligos[[i]] <- strsplit(pastedDelta, paste0("(?<=.{", splitlength, "})", collapse = ""), perl=TRUE)[[1]]    
       }
       
 }
@@ -121,9 +131,10 @@ for (i in 1:3) {
 ## Fill in final row of each oligo (with random bases) to generate oligos of equal length
 for (i in 1:3) {
       tmp <- oligos[[i]][length(oligos[[i]])]
-      if (nchar(oligos[[i]][length(oligos[[i]])]) != 72) {
-            oligos[[i]][length(oligos[[i]])] <- capture.output(cat(tmp, (sample(c(0,1), 
-                                                (72-nchar(tmp)), replace = TRUE)), sep = ""))
+      if (nchar(oligos[[i]][length(oligos[[i]])]) != splitlength) {
+            oligos[[i]][length(oligos[[i]])] <- capture.output(cat(tmp, 
+                                                sample(c(0,1), (splitlength-nchar(tmp)), replace = TRUE),
+                                                sep = ""))
       }
 }
 
@@ -164,8 +175,8 @@ top <- paste0(base_df$top_strand, collapse = "")
 bottom <- paste0(base_df$bottom_strand, collapse = "")   
 
 ## Chop the sequence character vectors into portions of oligo length (120))
-top_sequences <- strsplit(top, '(?<=.{72})', perl=TRUE)[[1]]
-bottom_sequences <- strsplit(bottom, '(?<=.{72})', perl=TRUE)[[1]]
+top_sequences <- strsplit(top, paste0("(?<=.{", splitlength, "})", collapse = ""), perl=TRUE)[[1]]
+bottom_sequences <- strsplit(bottom, paste0("(?<=.{", splitlength, "})", collapse = ""), perl=TRUE)[[1]]
 
 ## Use the strReverse function to obtain bottom_sequences in the 5' to 3' direction
 five2three_bottom_sequences <- strReverse(bottom_sequences)
@@ -182,11 +193,14 @@ image(rotate_mat(img_mat_list[[1]]), col = grey(c(0,1)))
 image(rotate_mat(img_mat_list[[2]]), col = grey(c(0,1)))
 image(rotate_mat(img_mat_list[[3]]), col = grey(c(0,1)))
 
-
-nchar(bin_codes[[1]])
-nchar(bin_codes[[2]])
-nchar(bin_codes[[3]])
+cat("***Compression achieved***\n")
+cat(args[3], "compressed from", dim(img_mat_list[[1]])[1]*dim(img_mat_list[[1]])[2], "to", nchar(bin_codes[[1]]), "\n", sep = " ")
+cat(args[4], " compressed from", dim(img_mat_list[[2]])[1]*dim(img_mat_list[[2]])[2], "to", nchar(bin_codes[[2]]), "\n", sep = " ")
+cat(args[5], " compressed from", dim(img_mat_list[[3]])[1]*dim(img_mat_list[[3]])[2], "to", nchar(bin_codes[[3]]), "\n\n", sep = " ")
+cat("***Output created***\n")
+cat(output_name, "\n\n")
 
 if (!is.null(run_over[[1]]) | !is.null(run_over[[2]]) | !is.null(run_over[[3]])) {
+      cat("***Run over binary strings***\n")
       print(run_over)
 }
