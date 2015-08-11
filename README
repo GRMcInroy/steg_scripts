@@ -24,7 +24,7 @@ lemonjuice - encode two/three ascii messages in a library of double stranded DNA
 
 baking_soda - encode three binary image files in a library of double stranded DNA duplexes
 
-ShortRefGlobalAligner - A short reference global aligner written by Dario Beraldi; does what it sas on the tin
+ShortRefGlobalAligner - A short reference global aligner written by Dario Beraldi (https://github.com/dariober/bioinformatics-cafe/tree/master/eclipse/ShortRefGlobalAligner)
 
 raw2srga - trim raw fastq file and align with SRGA
 
