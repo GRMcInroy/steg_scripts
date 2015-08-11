@@ -1,10 +1,15 @@
 ## R script containing functions and library dependencies
 suppressWarnings(source("STEG_functions.R"))
 
-input_file1 <- "asciitest1.txt"
-input_file2 <- "asciitest2.txt"
-input_file3 <- "asciitest3.txt"
-output_file <- "DNA_sequence.txt"
+output_prefix <- format(Sys.time(), "%Y%m%d_%H%M")
+
+## Read in command line arguments
+args <- commandArgs(TRUE)
+
+input_file1 <- args[1]
+input_file2 <- args[2]
+input_file3 <- args[3]
+output_file <- paste0(output_prefix, "_lemonjuice_output", collapse = "")
 
 binary_messages_vec <- character(length = 0)                                                              
 
